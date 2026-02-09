@@ -12,6 +12,9 @@ export default function UsagePage() {
   const [hasSmartMeter, setHasSmartMeter] = useState(false);
   const [installSmartMeter, setInstallSmartMeter] = useState(false);
   const [hasCarCharger, setHasCarCharger] = useState(false);
+    // 월 소비량 계산
+    let monthlyUsage = residents * 75;
+    if (hasCarCharger) monthlyUsage *= 2;
 
   // 새로고침 시 값 복구
   useEffect(() => {
@@ -33,12 +36,11 @@ export default function UsagePage() {
       hasSmartMeter,
       installSmartMeter,
       hasCarCharger,
+      monthlyKwh: monthlyUsage,
     });
-  }, [houseType, residents, hasSmartMeter, installSmartMeter, hasCarCharger]);
+  }, [houseType, residents, hasSmartMeter, installSmartMeter, hasCarCharger, monthlyUsage]);
 
-  // 월 소비량 계산
-  let monthlyUsage = residents * 75;
-  if (hasCarCharger) monthlyUsage *= 2;
+
 
   return (
     <div className="mx-auto mt-16 max-w-xl rounded-2xl border bg-white p-6 shadow-sm">

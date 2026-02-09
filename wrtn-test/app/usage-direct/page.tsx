@@ -9,6 +9,7 @@ export default function UsageDirectPage() {
   const [hasSmartMeter, setHasSmartMeter] = useState(false);
   const [installSmartMeter, setInstallSmartMeter] = useState(false);
   const [hasCarCharger, setHasCarCharger] = useState(false);
+  const finalUsage = hasCarCharger ? Number(kwh) * 2 : Number(kwh);
 
   // 새로고침 시 값 복구
   useEffect(() => {
@@ -28,10 +29,10 @@ export default function UsageDirectPage() {
       hasSmartMeter,
       installSmartMeter,
       hasCarCharger,
+      monthlyKwh: finalUsage,
     });
-  }, [kwh, hasSmartMeter, installSmartMeter, hasCarCharger]);
+  }, [kwh, hasSmartMeter, installSmartMeter, hasCarCharger, finalUsage]);
 
-  const finalUsage = hasCarCharger ? Number(kwh) * 2 : Number(kwh);
 
   return (
     <div className="mx-auto mt-16 max-w-xl rounded-2xl border bg-white p-6 shadow-sm">
