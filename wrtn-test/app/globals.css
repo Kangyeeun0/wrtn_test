@@ -5,7 +5,7 @@
   --foreground: #171717;
 }
 
-@theme inline {
+@them inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -15,12 +15,30 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #f5f5f5;
+  }
+
+  body {
+    @apply bg-gradient-to-b from-gray-900 to-gray-800;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  @apply bg-gradient-to-b from-blue-50 to-white min-h-screen;
+  color: #0a0a0a;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* number input 화살표 제거 */
+
+/* Chrome, Safari, Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

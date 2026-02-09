@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+##STEP 1
+- Next.js 15 기반의 애플리케이션 초기 환경을 구성했습니다.
+- TypeScript를 적용하여 타입 안정성을 확보했습니다.
+- App Router 구조를 사용해 이후 단계별 페이지 확장이 가능하도록 설계했습니다.
 
-## Getting Started
+##STEP2
+- 구매자가 거주 지역을 드롭다운으로 선택할 수 있는 랜딩 페이지를 구현했습니다.
+- 서울/경기 지역만 전력 판매가 가능하도록 제한하고, 선택 결과에 따라 판매 가능 여부를 즉시 노출합니다.
+- 판매 가능 여부를 색상과 메시지로 구분해 사용자에게 직관적인 피드백을 제공했습니다.
+- Tailwind CSS를 활용해 과제 요구사항을 충족하는 단순하고 명확한 UI를 구성했습니다.
 
-First, run the development server:
+## STEP 3
+- 월별 소비량을 모르는 사용자를 위해 거주 정보 기반의 소비량 추정 기능을 구현했습니다.
+- 거주자 수에 따라 1인당 75kWh 기준으로 월 소비량을 계산합니다.
+- 전기차 충전기 선택 시 최종 소비량이 2배로 반영되도록 처리했습니다.
+- 스마트 미터기 사용 여부 및 설치 옵션을 제공했습니다.
+- 사용자가 선택한 모든 옵션은 새로고침 시에도 유지되도록 localStorage에 저장했습니다.
+- 직접 입력을 원하는 사용자는 4단계 페이지로 이동할 수 있도록 연결했습니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## STEP 4
+- 월별 전력 소비량을 알고 있는 사용자를 위해 소비량 직접 입력 페이지를 구현했습니다.
+- kWh 단위로 소비량을 입력할 수 있도록 했습니다.
+- 가변 요금 선택을 고려해 스마트 미터기 사용 여부 및 설치 옵션을 제공합니다.
+- 전기차 충전기 선택 시 최종 소비량이 2배로 반영되도록 처리했습니다.
+- 사용자가 입력한 정보는 새로고침 시에도 유지되도록 localStorage에 저장했습니다.
+- 입력 완료 시 5단계 견적 및 결제 페이지로 이동할 수 있도록 구성했습니다.
+- 숫자 입력 UX 개선을 위해 number input의 기본 화살표를 제거하고, 초기 입력값을 빈 값으로 처리했습니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## STEP 5
+- 고정/가변 요금제를 비교하고 선택할 수 있는 견적 페이지를 구현했습니다.
+- 고정 요금 선택 시 1·2·3년 계약 옵션을 제공하고 할인 금액을 반영했습니다.
+- 월 소비량을 기준으로 전력 요금, 세금, 관리비를 계산해 상세 견적을 노출했습니다.
+- 스마트 미터기 설치 비용이 선택된 경우 최종 금액에 포함했습니다.
+- 결제 완료 시 상세 견적 내용을 동일하게 확인할 수 있는 페이지로 이동하도록 구성했습니다.
