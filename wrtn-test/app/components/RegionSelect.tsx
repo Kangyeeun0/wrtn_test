@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { REGIONS, AVAILABLE_REGIONS } from "@/app/constants/regions";
+import Link from "next/link";
 
 export default function RegionSelect() {
   const [region, setRegion] = useState("");
@@ -58,9 +59,11 @@ export default function RegionSelect() {
       )}
 
       <div className="mt-4 text-center">
-        <button className="rounded-lg bg-blue-500 px-4 py-2 text-white">
-          다음
-        </button>
+      <Link href="/usage">
+  <button className="rounded-lg bg-blue-500 px-4 py-2 text-white">
+    다음
+  </button>
+</Link>
       </div>
     </div>
   );
