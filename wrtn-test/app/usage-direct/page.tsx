@@ -4,21 +4,17 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { saveToStorage, loadFromStorage } from "@/app/utils/storage";
 
-type HouseType = "아파트" | "연립주택" | "단독주택";
-
-export default function UsagePage() {
-  const [houseType, setHouseType] = useState<HouseType>("아파트");
-  const [residents, setResidents] = useState(1);
+export default function UsageDirectPage() {
+  const [kwh, setKwh] = useState<number|"">("");
   const [hasSmartMeter, setHasSmartMeter] = useState(false);
   const [installSmartMeter, setInstallSmartMeter] = useState(false);
   const [hasCarCharger, setHasCarCharger] = useState(false);
 
   // 새로고침 시 값 복구
   useEffect(() => {
-    const saved = loadFromStorage("usage");
+    const saved = loadFromStorage("usageDirect");
     if (saved) {
-      setHouseType(saved.houseType);
-      setResidents(saved.residents);
+      setKwh(saved.kwh);
       setHasSmartMeter(saved.hasSmartMeter);
       setInstallSmartMeter(saved.installSmartMeter);
       setHasCarCharger(saved.hasCarCharger);
@@ -27,55 +23,36 @@ export default function UsagePage() {
 
   // 값 변경 시 저장
   useEffect(() => {
-    saveToStorage("usage", {
-      houseType,
-      residents,
+    saveToStorage("usageDirect", {
+      kwh,
       hasSmartMeter,
       installSmartMeter,
       hasCarCharger,
     });
-  }, [houseType, residents, hasSmartMeter, installSmartMeter, hasCarCharger]);
+  }, [kwh, hasSmartMeter, installSmartMeter, hasCarCharger]);
 
-  // 월 소비량 계산
-  let monthlyUsage = residents * 75;
-  if (hasCarCharger) monthlyUsage *= 2;
+  const finalUsage = hasCarCharger ? Number(kwh) * 2 : Number(kwh);
 
   return (
     <div className="mx-auto mt-16 max-w-xl rounded-2xl border bg-white p-6 shadow-sm">
-      <h2 className="mb-6 text-xl font-semibold text-black">맞춤형 전력 사용량 계산</h2>
+      <h2 className="mb-6 text-xl font-semibold">
+        전력 소비량 직접 입력
+      </h2>
 
-      {/* 거주 유형 */}
+      {/* kWh 입력 */}
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-600">
-          거주 유형
+          월 전력 소비량 (kWh)
         </label>
-        <select
-          value={houseType}
-          onChange={(e) => setHouseType(e.target.value as HouseType)}
-          className="mt-1 w-full rounded-lg border px-3 py-2 text-black"
-        >
-          <option>아파트</option>
-          <option>연립주택</option>
-          <option>단독주택</option>
-        </select>
-      </div>
-
-      {/* 거주자 수 */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-600">
-          거주자 수
-        </label>
-        <select
-          value={residents}
-          onChange={(e) => setResidents(Number(e.target.value))}
-          className="mt-1 w-full rounded-lg border px-3 py-2 text-black"
-        >
-          {[1, 2, 3, 4, 5].map((n) => (
-            <option key={n} value={n}>
-              {n === 5 ? "5명 이상" : `${n}명`}
-            </option>
-          ))}
-        </select>
+        <input
+          type="number"
+          min={0}
+          value={kwh}
+          onChange={(e) => e.target.value === "" ? setKwh("") : setKwh(Number(e.target.value))}
+          className="mt-1 w-full rounded-lg border px-3 py-2 text-black
+                     focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+          placeholder="ex) 350"
+        />
       </div>
 
       {/* 스마트 미터기 */}
@@ -113,22 +90,17 @@ export default function UsagePage() {
 
       {/* 결과 */}
       <div className="mb-6 rounded-lg bg-gray-50 p-4 text-sm">
-        예상 월 소비량:{" "}
-        <strong>{monthlyUsage} kWh</strong>
+        최종 월 소비량:{" "}
+        <strong>{finalUsage} kWh</strong>
       </div>
 
-      {/* 링크 */}
-      <div className="flex justify-between items-center">
-       
-      <Link href="/usage-direct" className="text-sm text-blue-600 underline">
-  직접 입력하기
-</Link>
-
+      {/* 이동 */}
+      <div className="flex justify-end">
         <Link
           href="/estimate"
-          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 cursor-pointer"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white"
         >
-          다음
+          견적 보기
         </Link>
       </div>
     </div>
