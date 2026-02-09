@@ -41,9 +41,8 @@ export default function UsagePage() {
   }, [houseType, residents, hasSmartMeter, installSmartMeter, hasCarCharger, monthlyUsage]);
 
 
-
   return (
-    <div className="mx-auto mt-16 max-w-xl rounded-2xl border bg-white p-6 shadow-sm">
+    <div className="mx-auto mt-16 max-w-md rounded-xl bg-white p-6 shadow-lg ">
       <h2 className="mb-6 text-xl font-semibold text-black">맞춤형 전력 사용량 계산</h2>
 
       {/* 거주 유형 */}

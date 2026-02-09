@@ -35,7 +35,7 @@ export default function UsageDirectPage() {
 
 
   return (
-    <div className="mx-auto mt-16 max-w-xl rounded-2xl border bg-white p-6 shadow-sm">
+    <div className="mx-auto mt-16 max-w-xl rounded-2xl bg-white p-6 shadow-sm">
       <h2 className="mb-6 text-xl font-semibold">
         전력 소비량 직접 입력
       </h2>

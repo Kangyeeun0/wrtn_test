@@ -21,7 +21,7 @@ export default function EstimatePage() {
     const usage = loadFromStorage("usage");
     const usageDirect = loadFromStorage("usageDirect");
 
-    if (usageDirect?.kwh !== undefined) {
+    if (usageDirect?.kwh !== "") {
       setMonthlyKwh(
         usageDirect.hasCarCharger
           ? usageDirect.kwh * 2

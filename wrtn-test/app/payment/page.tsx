@@ -14,7 +14,7 @@ export default function PaymentPage() {
   }
 
   return (
-    <div className="mx-auto mt-16 max-w-md rounded-2xl border bg-white p-6 shadow-sm">
+    <div className="mx-auto mt-16 max-w-md rounded-2xl bg-white p-6 shadow-sm">
       <h2 className="mb-2 text-xl font-semibold text-center">
         결제 완료
       </h2>
